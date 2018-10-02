@@ -13,7 +13,7 @@ CONTROLLER
 
 Handle requests from frontend and query backends for results.
   
-[Files]
+<b>sample-api-interface.py</b> - sample RESET API interface for controller module.
   
   
 
