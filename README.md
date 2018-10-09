@@ -13,7 +13,7 @@ CONTROLLER
 
 Handle requests from frontend and query backends for results.
   
-<b>sample-api-interface.py</b> - sample REST API interface for controller module.
+<b>sample-api-interface.py</b> - sample REST API interface for controller module.<br>
 <b>sample-yelp-api.py</b> - sample REST API call to Yelp using API KEY and simple query of "location" and "radius".  Format results using json.  
   
 
