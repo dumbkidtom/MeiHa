@@ -21,7 +21,8 @@ def main():
 
   for business in blist["businesses"]:
     print(business["name"].encode('ascii','ignore'))
-
+    print(business["url"].encode('ascii','ignore'))
+    print(business["phone"].encode('ascii','ignore'))
 
 
 
