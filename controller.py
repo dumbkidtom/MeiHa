@@ -57,7 +57,7 @@ class restaurant(Resource):
     # call Google API
     #gresults = callgoogle(zip,radius)
 
-    return results
+    return yresults
 
 api.add_resource(restaurant, "/restaurants")
 app.run(debug=True)
