@@ -48,11 +48,11 @@
     <div class="container">
       <P>
       <form method=post action=/search>
-        {{range }}
+        {{range .businesses}}
         <table cellspacing=10 border=0>
-         <tr><td>Name:</td><td>{{ }}</td></tr>
-         <tr><td>URL:</td><td>{{ }}</td></tr>
-         <tr><td>Phone:</td><td>{{ }}</td></tr>
+         <tr><td>Name:</td><td>{{.name}}</td></tr>
+         <tr><td>URL:</td><td>{{.url}}</td></tr>
+         <tr><td>Phone:</td><td>{{.phone}}</td></tr>
         </table>
         <p align=right>
         <input type=submit value="GO"></right>

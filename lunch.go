@@ -2,20 +2,31 @@ package main
 
 import (
 	"fmt"
-	"html/template"
 	"io/ioutil"
 	"net/http"
-	//  "net/url"
+	// "encoding/json"
+	// "regexp"
+	// "net/url"
+	// "html/template"
 )
 
 // controller REST API URL
 var controller_url string = "http://localhost:5000/restaurants"
 
-// restaurant properties
-type Restaurant struct {
-	Name  string
-	URL   string
-	Phone string
+// business properties
+type Business []struct {
+	Name  string `json:"name"`
+	URL   string `json:"url"`
+	Phone string `json:"phone"`
+}
+
+type Businesses struct {
+	Business []struct {
+		Name  string `json:"name"`
+		URL   string `json:"url"`
+		Phone string `json:"phone"`
+	}
+	Total int `json:"total"`
 }
 
 func index_handler(w http.ResponseWriter, r *http.Request) {
@@ -40,10 +51,10 @@ func search_handler(w http.ResponseWriter, r *http.Request) {
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
 
-	fmt.Printf("response:%s", body)
+	fmt.Fprintf(w, "response:%s", body)
 
-	t, _ := template.ParseFiles("card.gtpl")
-	t.Execute(w, nil)
+	//t, _ := template.ParseFiles("card.gtpl")
+	//t.Execute(os.Stdout, body)
 
 }
 
