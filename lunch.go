@@ -1,12 +1,11 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
+	"html/template"
 	"io/ioutil"
 	"net/http"
 	//  "net/url"
-	//  "html/template"
 )
 
 // controller REST API URL
@@ -41,15 +40,11 @@ func search_handler(w http.ResponseWriter, r *http.Request) {
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
 
-	fmt.Fprintf(w, "body:%s", body)
+	fmt.Printf("response:%s", body)
 
-	// convert response to JSON
-	//var bytes = []byte(body)
-	// Unmarshal string into structs.
-	var restaurants []Restaurant
-	json.Unmarshal(body, &restaurants)
+	t, _ := template.ParseFiles("card.gtpl")
+	t.Execute(w, nil)
 
-	fmt.Fprintf(w, "response:%s", restaurants)
 }
 
 func main() {
