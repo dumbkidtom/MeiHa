@@ -31,7 +31,7 @@ def callyelp(zip,radius):
 
     # construct kwargs for search_query
     qry = {
-        'limit': 10,
+        'limit': 30,
         'location': int(zip),
         'radius': int(radius)*1609
     }
