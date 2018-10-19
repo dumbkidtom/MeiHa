@@ -47,7 +47,7 @@
 
   <div class="container">
   <P>
-  <form method=post action=/search>
+  <form method=GET action=/search>
     <table cellspacing=10 border=0>
      <tr><td>ZIP:</td><td><input name=zip value="77042"></td></tr>
      <tr><td>RADIUS:</td><td><select name=radius>

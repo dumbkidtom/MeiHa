@@ -29,7 +29,7 @@
     background-color: white;
   }
 
-  input[type="submit"] {
+  input[type="button"] {
     background: none;
     box-shadow: none;
     border-radius: 0px;
@@ -37,27 +37,21 @@
   }
 </style>
 
-
   <div class="card">
     <table border=0 cellspacing=0 cellpadding=10px>
-    <tr><td><font size=15px><b>Lunch</b></font><br>
+    <tr><td><b>{{.Name}}</b><br>
             </td></tr>
     </table>
 
-
     <div class="container">
+      <form method=GET>
       <P>
-      <form method=post action=/search>
-        {{range .businesses}}
         <table cellspacing=10 border=0>
-         <tr><td>Name:</td><td>{{.name}}</td></tr>
-         <tr><td>URL:</td><td>{{.url}}</td></tr>
-         <tr><td>Phone:</td><td>{{.phone}}</td></tr>
+         <tr><td><a href="{{.URL}}"><img src="{{.IMGURL}}" width="250"></a></td></tr>
         </table>
         <p align=right>
-        <input type=submit value="GO"></right>
+        <input type=button value="Next" onclick="window.location.reload()"></right>
         </p>
-        {{end}}
       </form>
     </div>
 

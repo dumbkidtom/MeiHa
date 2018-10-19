@@ -1,38 +1,36 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"html/template"
 	"io/ioutil"
+	"log"
+	"math/rand"
 	"net/http"
 	// "encoding/json"
 	// "regexp"
 	// "net/url"
-	// "html/template"
 )
 
 // controller REST API URL
 var controller_url string = "http://localhost:5000/restaurants"
 
-// business properties
-type Business []struct {
-	Name  string `json:"name"`
-	URL   string `json:"url"`
-	Phone string `json:"phone"`
+type Results struct {
+	Businesses []Business `json:"businesses"`
+	Total      int        `json:"total"`
 }
 
-type Businesses struct {
-	Business []struct {
-		Name  string `json:"name"`
-		URL   string `json:"url"`
-		Phone string `json:"phone"`
-	}
-	Total int `json:"total"`
+// business properties
+type Business struct {
+	Name   string `json:"name"`
+	URL    string `json:"url"`
+	IMGURL string `json:"image_url"`
+	Phone  string `json:"phone"`
 }
 
 func index_handler(w http.ResponseWriter, r *http.Request) {
 
-	// t,_ := template.ParseFiles("input.gtpl")
-	// t.Execute(w, nil)
 	http.ServeFile(w, r, "input.gtpl")
 
 }
@@ -51,10 +49,22 @@ func search_handler(w http.ResponseWriter, r *http.Request) {
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
 
-	fmt.Fprintf(w, "response:%s", body)
+	// convert []byte(body) to json
+	res := &Results{}
+	err := json.Unmarshal([]byte(body), res)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	//t, _ := template.ParseFiles("card.gtpl")
-	//t.Execute(os.Stdout, body)
+	// generate random number within list of restaurants
+	tt := len(res.Businesses)
+	rn := rand.Intn(tt)
+
+	// display restaurant info using template
+	t, _ := template.ParseFiles("card.gtpl")
+	t.Execute(w, res.Businesses[rn])
+
+	//fmt.Fprintf(w, "total: %d, rand: %d", tt, rn)
 
 }
 
