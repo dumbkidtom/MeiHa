@@ -51,6 +51,7 @@
         </table>
         <p align=right>
         <input type=button value="Next" onclick="window.location.reload()"></right>
+        <input type=button value="Home" onclick="window.location = '/';">
         </p>
       </form>
     </div>
