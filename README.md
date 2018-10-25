@@ -7,7 +7,7 @@ FRONTEND
 Display web interface for getting input from users, and display results.
 
 <b>lunch.go</b> - Build using GoLang so it has builtin Web interface, no need to rely on 3rd part http servers.<br>
-<b>input.gtpl</b> - HTML template to display the initial page of the app.
+<b>input.gtpl</b> - HTML template to display the initial page of the app.<br>
 <b>card.gtpl</b> - HTML template to display the result.
 
 CONTROLLER
