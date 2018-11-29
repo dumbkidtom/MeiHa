@@ -27,14 +27,19 @@ import sys
 app = Flask(__name__)
 api = Api(app)
 
-def callyelp(zip,radius):
+def callyelp(zip,radius,lat,long):
 
     # construct kwargs for search_query
     qry = {
         'limit': 30,
         'location': int(zip),
+        'latitude': lat,
+        'longitude': long,
+        'categories': "Restaurants",
         'radius': int(radius)*1609
     }
+
+    print(qry)
 
     try:
       yelp_api = YelpAPI(myapi.api_key(), timeout_s=3.0)
@@ -51,9 +56,11 @@ class restaurant(Resource):
   def get(self):
     zip = request.args.get('zip')
     radius = request.args.get('radius')
+    lat = request.args.get('latitude')
+    long = request.args.get('longitude')
 
     # call Yelp API
-    yresults = callyelp(zip,radius)
+    yresults = callyelp(zip,radius,lat,long)
 
     # call Google API
     #gresults = callgoogle(zip,radius)

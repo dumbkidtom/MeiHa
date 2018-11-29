@@ -35,15 +35,27 @@ func index_handler(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func img_handler(w http.ResponseWriter, r *http.Request) {
+	// myimg := r.URL.Path
+	http.ServeFile(w, r, "images/gps.png")
+}
+
 func search_handler(w http.ResponseWriter, r *http.Request) {
 
 	r.ParseForm()
 
 	myzip := r.Form.Get("zip")
 	myradius := r.Form.Get("radius")
+	mylatitude := r.Form.Get("lat")
+	mylongitude := r.Form.Get("long")
+	url := ""
 
 	// call Controller REST API for results
-	url := fmt.Sprintf("%s?zip=%s&radius=%s", controller_url, myzip, myradius)
+	if len(myzip) > 5 {
+		url = fmt.Sprintf("%s?zip=0&latitude=%s&longitude=%s&radius=%s", controller_url, mylatitude, mylongitude, myradius)
+	} else {
+		url = fmt.Sprintf("%s?zip=%s&radius=%s", controller_url, myzip, myradius)
+	}
 
 	resp, _ := http.Get(url)
 	defer resp.Body.Close()
@@ -71,6 +83,7 @@ func search_handler(w http.ResponseWriter, r *http.Request) {
 func main() {
 
 	http.HandleFunc("/", index_handler)
+	http.HandleFunc("/images/", img_handler)
 	http.HandleFunc("/search", search_handler)
 	http.ListenAndServe(":8080", nil)
 
