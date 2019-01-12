@@ -85,6 +85,6 @@ func main() {
 	http.HandleFunc("/", index_handler)
 	http.HandleFunc("/images/", img_handler)
 	http.HandleFunc("/search", search_handler)
-	http.ListenAndServe(":8080", nil)
-
+	// http.ListenAndServe(":8080", nil)
+	http.ListenAndServeTLS(":8443", "lunch.crt", "lunch.key", nil)
 }
